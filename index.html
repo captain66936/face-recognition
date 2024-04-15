@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition</title>
+</head>
+<body>
+    <h1>Face Recognition</h1>
+    <button onclick="startCamera()">Start Camera</button>
+    <div id="cameraFeed"></div>
+
+    <script>
+        function startCamera() {
+            const video = document.createElement('video');
+            video.setAttribute('id', 'videoElement');
+            video.setAttribute('autoplay', true);
+            video.style.width = '100%';
+
+            const constraints = {
+                video: true
+            };
+
+            navigator.mediaDevices.getUserMedia(constraints)
+                .then(function(mediaStream) {
+                    video.srcObject = mediaStream;
+                    document.getElementById('cameraFeed').appendChild(video);
+                })
+                .catch(function(err) {
+                    console.log('Error accessing camera:', err);
+                });
+        }
+    </script>
+</body>
+</html>
